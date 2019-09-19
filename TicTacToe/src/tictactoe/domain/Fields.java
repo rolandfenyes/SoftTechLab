@@ -2,14 +2,32 @@ package tictactoe.domain;
 
 import java.util.ArrayList;
 
+import tictactoe.business.GameStatus;
+
 public class Fields {
 	
 	Signs[][] gameBoard;
 	Signs sign;
+	boolean isPlayer = false;
 	
 	public Fields(Signs[][] gameBoard, Signs sign) {
 		this.gameBoard = gameBoard;
 		this.sign = sign;
+	}
+	
+	public void setPlayer() {
+		isPlayer = true;
+	}
+	
+	public boolean getIsPlayer() {
+		return isPlayer;
+	}
+	
+	public GameStatus getGameStatusDependingOnIsPlayer() {
+		if (isPlayer) {
+			return GameStatus.PLAYER_WON;
+		}
+		return GameStatus.COMPUTER_WON;
 	}
 	
 	public Signs getSign() {
