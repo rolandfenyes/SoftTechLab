@@ -82,12 +82,10 @@ public class Fields {
 	
 	public boolean hasWonInDiagonals1(Signs sign) {
 		ArrayList<Signs> correct = new ArrayList<Signs>();
-		for (int rows = 0; rows < 3; rows++) {
-			int columns = 0;
-			if (gameBoard[rows][columns] == sign) {
+		for (int diagonal = 0; diagonal < 3; diagonal++) {
+			if (gameBoard[diagonal][diagonal] == sign) {
 				correct.add(sign);
 			}
-			columns++;
 		}
 		if (correct.size() == 3) {
 			return true;
@@ -97,12 +95,12 @@ public class Fields {
 	
 	public boolean hasWonInDiagonals2(Signs sign) {
 		ArrayList<Signs> correct = new ArrayList<Signs>();
-		for (int rows = 0; rows < 3; rows++) {
-			int columns = 2;
-			if (gameBoard[rows][columns] == sign) {
+		int column = 2;
+		for (int diagonal = 0; diagonal < 3; diagonal++) {
+			if (gameBoard[diagonal][column] == sign) {
 				correct.add(sign);
 			}
-			columns--;
+			column--;
 		}
 		if (correct.size() == 3) {
 			return true;
