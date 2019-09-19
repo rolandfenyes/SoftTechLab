@@ -1,7 +1,6 @@
 package tictactoe.business;
 
 import java.util.Scanner;
-
 import tictactoe.domain.Fields;
 import tictactoe.domain.Signs;
 import tictactoe.domain.Table;
@@ -13,9 +12,7 @@ public class TicTacToeGame {
 	private GameStatus status = GameStatus.ONGOING;
 	private static Scanner scanner = new Scanner(System.in);
 	
-	public TicTacToeGame() {
-		
-	}
+	public TicTacToeGame() {}
 	
 	public void step(Fields actualPlayer) {
 		while (true) {
@@ -30,15 +27,23 @@ public class TicTacToeGame {
 		}
 	}
 	
-	public void step(int[] coordinates, Fields actualPlayer) {
+	public void step(int[] coordinates, Fields enemyPlayer) {
 		while (true) {
 			try {
-				put(coordinates[0], coordinates[1], actualPlayer.getSign());
+				put(coordinates[0], coordinates[1], enemyPlayer.getSign());
 				break;
 			} catch (IllegalStateException error){
-				coordinates = handleException(error, actualPlayer, coordinates);
+				coordinates = handleException(error, enemyPlayer, coordinates);
 			}
 		}
+	}
+	
+	public void put(int x, int y, Signs correctSign) {
+		if (gameBoard[x][y]== Signs.URES) {
+			gameBoard[x][y] = correctSign;
+			return;
+		}
+		throw new IllegalStateException("Selected field has already reserved.");	
 	}
 	
 	public static int[] handleException(Exception e, Fields actualPlayer, int[] coordinates) {
@@ -72,14 +77,6 @@ public class TicTacToeGame {
 			coordinates[1] = 0;
 		}
 		return coordinates;
-	}
-	
-	public void put(int x, int y, Signs correctSign) {
-		if (gameBoard[x][y]== Signs.URES) {
-			gameBoard[x][y] = correctSign;
-			return;
-		}
-		throw new IllegalStateException("Selected field has already reserved.");	
 	}
 	
 	public void drawTable() {
