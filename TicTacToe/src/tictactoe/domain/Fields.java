@@ -34,25 +34,18 @@ public class Fields {
 		return sign;
 	}
 
-	public boolean hasWon(Signs sign) {
-		boolean hasWon = false;
-		hasWon = hasWonInRows(sign);
-		if (hasWon) {
+	public boolean hasWon(Signs sign) {		
+		if (hasWonInRows(sign)) {
 			return true;
-		}
-		hasWon = hasWonInColumns(sign);
-		if (hasWon) {
+		} else if (hasWonInColumns(sign)) {
 			return true;
-		}
-		hasWon = hasWonInDiagonals1(sign);
-		if (hasWon) {
+		} else if (hasWonInDiagonals1(sign)) {
 			return true;
-		}
-		hasWon = hasWonInDiagonals2(sign);
-		if (hasWon) {
+		} else if (hasWonInDiagonals2(sign)) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 	
 	public boolean hasWonInRows(Signs sign) {
